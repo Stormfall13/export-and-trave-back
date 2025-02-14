@@ -12,7 +12,7 @@ const app = express();
 
 // app.use(cors());
 app.use(cors({
-    origin: "https://explore-travel-front.vercel.app",
+    origin: "*",
     credentials: true,
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization"
@@ -45,6 +45,7 @@ app.get("/test", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
+console.log("🔍 Railway assigned PORT:", process.env.PORT)
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 sequelize
