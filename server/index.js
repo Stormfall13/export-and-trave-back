@@ -47,8 +47,7 @@ app.get("/test", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
-console.log("🔍 Railway assigned PORT:", process.env.PORT)
-app.listen(PORT, "0.0.0.0" , () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 
 
