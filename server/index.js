@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const authMiddleware = require("./middlewares/authMiddleware");
+const net = require('net');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors({
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization"
 }));
+
 app.use(helmet());
 app.use(express.json());
 
@@ -47,6 +49,16 @@ app.get("/test", (req, res) => {
 const PORT = process.env.PORT || 8080;
 console.log("🔍 Railway assigned PORT:", process.env.PORT)
 app.listen(PORT, "0.0.0.0" , () => console.log(`🚀 Server running on port ${PORT}`));
+
+
+
+const serverTest = net.createServer();
+serverTest.listen(process.env.PORT || 8080, () => {
+    console.log(`✅ TEST: Port ${process.env.PORT || 8080} is open`);
+});
+serverTest.on('error', (err) => {
+    console.error(`❌ ERROR: Cannot bind to port ${process.env.PORT || 8080} - ${err.message}`);
+});
 
 sequelize
     .sync({ alter: true })
