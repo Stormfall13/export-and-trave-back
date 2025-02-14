@@ -50,14 +50,14 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: "postgres",
-    logging: false,
-    dialectOptions: {
-        ssl: {
-            require: true, // Railway требует SSL для удалённого подключения
-            rejectUnauthorized: false,
-        },
-    },
+  dialect: "postgres",
+  dialectOptions: {
+      ssl: {
+          require: true,
+          rejectUnauthorized: false
+      }
+  },
+  logging: console.log // 👈 Покажет SQL-запросы в логах
 });
 
 const ServerDB = async () => {
