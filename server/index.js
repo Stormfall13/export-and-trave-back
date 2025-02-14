@@ -10,7 +10,12 @@ const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: "https://explore-travel-front.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
+}));
 app.use(helmet());
 app.use(express.json());
 
@@ -34,7 +39,8 @@ app.use((req, res, next) => {
     next();
 });
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 sequelize
