@@ -46,6 +46,22 @@ app.get("/test", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
+
+
+if (!module.parent) {
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  }
+  
+  app.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`❌ Port ${PORT} is already in use. Retrying...`);
+      setTimeout(() => {
+        app.close();
+        app.listen(PORT, () => console.log(`🚀 Server restarted on port ${PORT}`));
+      }, 1000);
+    }
+  });
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 
