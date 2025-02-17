@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-const SECRET_KEY = process.env.JWT_SECRET || "supersecretkey"; // Лучше хранить в .env
 
 // Регистрация пользователя (уже есть)
 const register = async (req, res) => {
@@ -39,7 +38,7 @@ const login = async (req, res) => {
         }
 
         // Генерируем JWT-токен
-        const token = jwt.sign({ userId: user.id, role: user.role }, SECRET_KEY, {
+        const token = jwt.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
 
