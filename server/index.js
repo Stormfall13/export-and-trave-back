@@ -45,7 +45,7 @@ app.get("/test", (req, res) => {
     res.json({ message: "✅ Server is working!" });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 
